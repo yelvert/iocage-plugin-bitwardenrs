@@ -65,7 +65,7 @@ cp -r "${BITWARDEN_RS_DIR}/target/release" "${INSTALL_DIR}"
 cp -r "${WEB_VAULT_PATH}/build" "${INSTALL_DIR}/web-vault"
 chown -R "${USERNAME}:${USERNAME}" "${INSTALL_DIR}"
 mkdir "${DATA_FOLDER}"
-chown -R "${USERNAME}:${USERNAME}" /mnt/bitwardenrs
+chown -R "${USERNAME}:${USERNAME}" "${DATA_FOLDER}"
 
 cat <<-EOF > /usr/local/etc/rc.d/bitwardenrs
 #!/bin/sh
@@ -83,19 +83,26 @@ task="./bitwarden_rs"
 procname="\${task}"
 command="/usr/sbin/daemon"
 command_args="-u ${USERNAME} -p \${pidfile} \${task}"
-bitwardenrs_chdir=/usr/local/etc/bitwardenrs
+bitwardenrs_chdir=${INSTALL_DIR}
 
-load_rc_config \$name
+load_rc_config $name
 
 bitwardenrs_enable=\${bitwardenrs_enable:-"NO"}
-bitwardenrs_default_data=\${bitwardenrs_default_data:-""}
+bitwardenrs_data=\${bitwardenrs_data:-""}
 bitwardenrs_default_admin_token=\${bitwardenrs_default_admin_token:-""}
+bitwardenrs_use_syslog=\${bitwardenrs_use_syslog:-"false"}
+bitwardenrs_websocket_enabled=\${bitwardenrs_websocket_enabled:-"true"}
+bitwardenrs_rocket_workers=\${bitwardenrs_rocket_workers:-""}
 
-export DATA_FOLDER="\${bitwardenrs_default_data}"
+export DATA_FOLDER="\${bitwardenrs_data}"
 export ADMIN_TOKEN="\${bitwardenrs_default_admin_token}"
+export USE_SYSLOG="\${bitwardenrs_use_syslog}"
+export WEBSOCKET_ENABLED="\${bitwardenrs_websocket_enabled}"
+export ROCKET_WORKERS="\${bitwardenrs_rocket_workers}"
 
 run_rc_command "\$1"
 EOF
+chmod +x /usr/local/etc/rc.d/bitwardenrs
 
 admin_token="$(openssl rand -base64 48)"
 
