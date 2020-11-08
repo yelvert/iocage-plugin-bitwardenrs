@@ -2,7 +2,7 @@
     "name": "Bitwarden",
     "plugin_schema": "2",
     "release": "12.2-RELEASE",
-    "artifact": "file:.",
+    "artifact": "https://github.com/yelvert/iocage-plugin-bitwardenrs.git",
     "official": false,
     "properties": {
         "bpf": 1,
