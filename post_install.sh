@@ -94,7 +94,7 @@ bitwardenrs_default_admin_token=\${bitwardenrs_default_admin_token:-""}
 export DATA_FOLDER="\${bitwardenrs_default_data}"
 export ADMIN_TOKEN="\${bitwardenrs_default_admin_token}"
 
-run_rc_command "$1"
+run_rc_command "\$1"
 EOF
 
 admin_token="$(openssl rand -base64 48)"
