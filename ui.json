@@ -1,0 +1,4 @@
+{
+  "adminportal": "http://%%IP%%:8000",
+  "docurl": "https://github.com/yelvert/iocage-plugin-bitwardenrs"
+}

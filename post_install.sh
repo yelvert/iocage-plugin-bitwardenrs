@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/local/bin/bash
+
+set -xeuo pipefail
 
 # https://www.truenas.com/community/threads/how-to-build-your-own-bitwarden_rs-jail.81389/
 
