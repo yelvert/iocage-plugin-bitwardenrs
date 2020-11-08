@@ -24,7 +24,7 @@ CARGO_HOME="${RUST_HOME}"
 export CARGO_HOME
 curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
 
-source "${RUST_HOME}/env"
+. "${RUST_HOME}/env"
 
 RUSTUP_SHIM="/usr/local/bin/rustup_shim"
 cat <<-EOF > "${RUSTUP_SHIM}"
